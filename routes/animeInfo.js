@@ -17,6 +17,7 @@ route.get("/popular", async (req, res) => {
     data: {
       query: searchQueryStrings.PopularAnimeQuery,
       variables: {
+        page: req.query.page === undefined ? 1 : req.query.page,
         perPage: req.query.count === undefined ? 10 : req.query.count,
       },
     },
@@ -35,6 +36,7 @@ route.get("/trending", async (req, res) => {
     data: {
       query: searchQueryStrings.TrendingAnimeQuery,
       variables: {
+        page: req.query.page === undefined ? 1 : req.query.page,
         perPage: req.query.count === undefined ? 10 : req.query.count,
       },
     },
@@ -53,6 +55,26 @@ route.get("/top100", async (req, res) => {
     data: {
       query: searchQueryStrings.top100AnimeQuery,
       variables: {
+        page: req.query.page === undefined ? 1 : req.query.page,
+        perPage: req.query.count === undefined ? 10 : req.query.count,
+      },
+    },
+  });
+  res.status(200).json(response.data);
+});
+
+route.get("/favourite", async (req, res) => {
+  const response = await axios({
+    url: baseUrl,
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    data: {
+      query: searchQueryStrings.favouritesAnimeQuery,
+      variables: {
+        page: req.query.page === undefined ? 1 : req.query.page,
         perPage: req.query.count === undefined ? 10 : req.query.count,
       },
     },

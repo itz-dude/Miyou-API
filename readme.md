@@ -10,15 +10,19 @@ Endpoints
 
 Popular Anime
 
-- http://localhost:4000/api/popular?count=5
+- http://localhost:4000/api/popular?page=1&count=10
 
 Trending Anime
 
-- http://localhost:4000/api/trending?count=5
+- http://localhost:4000/api/trending?page=1&count=10
 
 Top 100 Anime
 
-- http://localhost:4000/api/top100?count=5
+- http://localhost:4000/api/top100?page=1&count=10
+
+Favourite Anime
+
+- http://localhost:4000/api/favourite?page=1&count=10
 
 Search Anime
 
