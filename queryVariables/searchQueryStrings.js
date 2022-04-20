@@ -95,7 +95,7 @@ let favouritesAnimeQuery = `
 				lastPage
 				hasNextPage
 			}
-			media(sort: FAVOURITES_DESC) {
+			media(sort: FAVOURITES_DESC, type: ANIME) {
 				title {
 					romaji
 					english
@@ -113,7 +113,31 @@ let favouritesAnimeQuery = `
 	}
 `;
 
+let searchAnimeQuery = `
+	query($search: String) {
+		Media (search : $search, type: ANIME) {
+			title {
+				romaji
+				english
+			}
+			season
+			seasonYear
+			type
+			bannerImage
+			coverImage{
+				extraLarge
+				large
+			}
+			description
+			episodes
+			status
+			genres
+		}
+	}
+`;
+
 exports.PopularAnimeQuery = PopularAnimeQuery;
 exports.TrendingAnimeQuery = TrendingAnimeQuery;
 exports.top100AnimeQuery = top100AnimeQuery;
 exports.favouritesAnimeQuery = favouritesAnimeQuery;
+exports.searchAnimeQuery = searchAnimeQuery;

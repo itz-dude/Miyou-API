@@ -5,7 +5,9 @@ const axios = require("axios");
 const route = express.Router();
 
 const url = "https://gogoanime.fi";
-const kitsuUrl = "https://kitsu.io/api/graphql";
+const anilistUrl = "https://graphql.anilist.co";
+
+let searchQueryStrings = require("../queryVariables/searchQueryStrings");
 
 route.get("/getanime", async (req, res) => {
   let link = url + req.query.link;
@@ -50,52 +52,30 @@ route.get("/getanime", async (req, res) => {
       episodes.push(baseUrl + "-episode-" + i);
     }
 
-    let slug = req.query.link.replace("/category/", "");
-    slug = slug.replace("-tv", "");
-    slug = slug.replace("-season", "");
-    slug = slug.replace("-dub", "");
+    let anilistResponse;
+    try {
+      anilistResponse = await axios({
+        url: anilistUrl,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        data: {
+          query: searchQueryStrings.searchAnimeQuery,
+          variables: {
+            search: title.replace(" (Dub)", "").replace(" (TV)", ""),
+          },
+        },
+      });
+    } catch (err) {
+      console.log("Error from getanime anilist api call", err);
+    }
 
-    let AnimeBannerImageQuery = `
-      query AnimeBannerImageQuery {
-        findAnimeBySlug(slug: "${slug}") {
-          posterImage {
-            original {
-              url
-            }
-          }
-          bannerImage {
-            original {
-              url
-            }
-          }
-        }
-      }
-    `;
-
-    let animeBanner = await axios({
-      url: kitsuUrl,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      data: {
-        query: AnimeBannerImageQuery,
-        variables: {},
-      },
-    });
-
-    result.push({
+    let gogoResponse = [];
+    gogoResponse.push({
       title,
       image,
-      kitsuPoster:
-        animeBanner.data.data.findAnimeBySlug != null
-          ? animeBanner.data.data.findAnimeBySlug.posterImage.original.url
-          : "",
-      kitsuBanner:
-        animeBanner.data.data.findAnimeBySlug != null
-          ? animeBanner.data.data.findAnimeBySlug.bannerImage.original.url
-          : "",
       type,
       description,
       genre,
@@ -105,6 +85,31 @@ route.get("/getanime", async (req, res) => {
       numOfEpisodes,
       episodes,
     });
+
+    if (anilistResponse !== undefined) {
+      let anilist = [];
+      anilist.push({
+        title: anilistResponse.data.data.Media.title,
+        anilistPoster: anilistResponse.data.data.Media.coverImage,
+        anilistBannerImage: anilistResponse.data.data.Media.bannerImage,
+        type: anilistResponse.data.data.Media.type,
+        description: anilistResponse.data.data.Media.description,
+        genre: anilistResponse.data.data.Media.genres,
+        released: anilistResponse.data.data.Media.seasonYear,
+        status: anilistResponse.data.data.Media.status,
+        numOfEpisodes: anilistResponse.data.data.Media.episodes,
+        episodes,
+      });
+      result.push({
+        anilistResponse: anilist,
+        gogoResponse,
+      });
+    } else {
+      result.push({
+        anilistResponse: "NONE",
+        gogoResponse,
+      });
+    }
     res.status(200).json(result);
   } catch (err) {
     console.log("Error from getAnime Route", err);

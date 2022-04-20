@@ -82,4 +82,22 @@ route.get("/favourite", async (req, res) => {
   res.status(200).json(response.data);
 });
 
+route.get("/searchanime", async (req, res) => {
+  const response = await axios({
+    url: baseUrl,
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    data: {
+      query: searchQueryStrings.searchAnimeQuery,
+      variables: {
+        search: req.query.name,
+      },
+    },
+  });
+  res.status(200).json(response.data);
+});
+
 module.exports = route;
