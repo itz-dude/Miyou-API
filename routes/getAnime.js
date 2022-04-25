@@ -72,8 +72,7 @@ route.get("/getanime", async (req, res) => {
       console.log("Error from getanime anilist api call", err);
     }
 
-    let gogoResponse = [];
-    gogoResponse.push({
+    let gogoResponse = {
       title,
       image,
       type,
@@ -84,11 +83,10 @@ route.get("/getanime", async (req, res) => {
       otherName,
       numOfEpisodes,
       episodes,
-    });
+    };
 
     if (anilistResponse !== undefined) {
-      let anilist = [];
-      anilist.push({
+      let anilist = {
         title: anilistResponse.data.data.Media.title,
         anilistPoster: anilistResponse.data.data.Media.coverImage,
         anilistBannerImage: anilistResponse.data.data.Media.bannerImage,
@@ -99,7 +97,7 @@ route.get("/getanime", async (req, res) => {
         status: anilistResponse.data.data.Media.status,
         numOfEpisodes: anilistResponse.data.data.Media.episodes,
         episodes,
-      });
+      };
       result.push({
         anilistResponse: anilist,
         gogoResponse,
