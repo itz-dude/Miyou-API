@@ -29,13 +29,13 @@ route.get("/getlinks", async (req, res) => {
         case 0:
           vidstreaming = $el.find("a").attr("data-video");
           if (vidstreaming !== undefined) {
-            vidstreaming = "https:" + vidstreaming;
+            vidstreaming = vidstreaming;
           }
           break;
         case 1:
           gogoserver = $el.find("a").attr("data-video");
           if (gogoserver !== undefined) {
-            gogoserver = "https:" + gogoserver;
+            gogoserver = gogoserver;
           }
           break;
         case 2:
@@ -56,7 +56,17 @@ route.get("/getlinks", async (req, res) => {
       }
     });
 
+    let numOfEpisodes = $("#episode_page li a").attr("ep_end");
+    let baseEpisodeLink = req.query.link.replace(/\d+$/, "");
+    let episodes = [];
+    for (let i = 1; i <= numOfEpisodes; i++) {
+      episodes.push(baseEpisodeLink + i);
+    }
+
+    let titleName = $(".title_name h2").text();
+
     result.push({
+      titleName,
       downloadLink,
       vidstreaming,
       gogoserver,
@@ -65,6 +75,9 @@ route.get("/getlinks", async (req, res) => {
       mixdrop,
       mp4upload,
       doodstream,
+      numOfEpisodes,
+      baseEpisodeLink,
+      episodes,
     });
     res.status(200).json(result);
   } catch (err) {

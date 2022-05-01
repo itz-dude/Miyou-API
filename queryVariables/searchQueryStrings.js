@@ -12,6 +12,7 @@ let PopularAnimeQuery = `
 				title {
 					romaji
 					english
+					userPreferred
 				}
 				bannerImage
 				coverImage {
@@ -41,6 +42,7 @@ let TrendingAnimeQuery = `
 				title {
 					romaji
 					english
+					userPreferred
 				}
 				bannerImage
 				coverImage {
@@ -70,6 +72,7 @@ let top100AnimeQuery = `
 				title {
 					romaji
 					english
+					userPreferred
 				}
 				bannerImage
 				coverImage {
@@ -99,6 +102,7 @@ let favouritesAnimeQuery = `
 				title {
 					romaji
 					english
+					userPreferred
 				}
 				bannerImage
 				coverImage {
@@ -119,6 +123,7 @@ let searchAnimeQuery = `
 			title {
 				romaji
 				english
+				userPreferred
 			}
 			season
 			seasonYear
