@@ -56,7 +56,7 @@ route.get("/getlinks", async (req, res) => {
       }
     });
 
-    let numOfEpisodes = $("#episode_page li a").attr("ep_end");
+    let numOfEpisodes = $("#episode_page li:last-child a").attr("ep_end");
     let baseEpisodeLink = req.query.link.replace(/\d+$/, "");
     let episodes = [];
     for (let i = 1; i <= numOfEpisodes; i++) {

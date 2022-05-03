@@ -20,7 +20,7 @@ route.get("/getanime", async (req, res) => {
     let title = $(".anime_info_body_bg").find("h1").text();
     let image = $(".anime_info_body_bg").find("img[src]").attr("src");
     let type, description, genre, released, status, otherName;
-    let numOfEpisodes = $("#episode_page li a").attr("ep_end");
+    let numOfEpisodes = $("#episode_page li:last-child a").attr("ep_end");
 
     $(".type").each((i, el) => {
       const $el = $(el);
