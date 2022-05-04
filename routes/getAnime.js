@@ -6,6 +6,7 @@ const route = express.Router();
 
 const url = "https://gogoanime.fi";
 const anilistUrl = "https://graphql.anilist.co";
+const list_episodes_url = "https://ajax.gogo-load.com/ajax/load-list-episode";
 
 let searchQueryStrings = require("../queryVariables/searchQueryStrings");
 
@@ -47,9 +48,19 @@ route.get("/getanime", async (req, res) => {
     });
 
     let episodes = [];
-    let baseUrl = req.query.link.replace("/category", "");
+
+    const movie_id = $("#movie_id").attr("value");
+    const alias = $("#alias_anime").attr("value");
+    const episodeHtml = await axios.get(
+      `${list_episodes_url}?ep_start=${0}&ep_end=${numOfEpisodes}&id=${movie_id}&default_ep=${0}&alias=${alias}`
+    );
+    const $$ = cheerio.load(episodeHtml.data);
+
+    let baseUrl = $$("#episode_related > li:last-child a").attr("href").trim();
+    baseUrl = baseUrl.substring(0, baseUrl.length - 1);
+
     for (let i = 1; i <= numOfEpisodes; i++) {
-      episodes.push(baseUrl + "-episode-" + i);
+      episodes.push(baseUrl + i);
     }
 
     let anilistResponse;
