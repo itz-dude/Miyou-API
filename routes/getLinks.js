@@ -1,6 +1,7 @@
 const express = require("express");
 const cheerio = require("cheerio");
 const axios = require("axios");
+const { scrapeSourceFiles } = require("../queryVariables/SourceFiles");
 
 const route = express.Router();
 
@@ -8,6 +9,8 @@ const url = "https://gogoanime.fi";
 
 route.get("/getlinks", async (req, res) => {
   let link = url + req.query.link;
+
+  let sources = await scrapeSourceFiles(req.query.link);
 
   try {
     const result = [];
@@ -78,6 +81,7 @@ route.get("/getlinks", async (req, res) => {
       numOfEpisodes,
       baseEpisodeLink,
       episodes,
+      sources,
     });
     res.status(200).json(result);
   } catch (err) {

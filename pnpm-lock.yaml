@@ -4,12 +4,14 @@ specifiers:
   axios: ^0.26.1
   cheerio: 1.0.0-rc.10
   cors: ^2.8.5
+  crypto-js: ^4.1.1
   express: ^4.17.3
 
 dependencies:
   axios: 0.26.1
   cheerio: 1.0.0-rc.10
   cors: 2.8.5
+  crypto-js: 4.1.1
   express: 4.17.3
 
 packages:
@@ -109,6 +111,10 @@ packages:
     dependencies:
       object-assign: 4.1.1
       vary: 1.1.2
+    dev: false
+
+  /crypto-js/4.1.1:
+    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
     dev: false
 
   /css-select/4.3.0:
