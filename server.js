@@ -3,16 +3,7 @@ const app = express();
 const cors = require("cors");
 const PORT = process.env.PORT || 4000;
 
-app.use(
-  cors({
-    origin: [
-      "https://miyou.netlify.app/",
-      "https://www.miyou.tk/",
-      "https://miyou.tk/",
-      "http://localhost:3000",
-    ],
-  })
-);
+app.use(cors());
 
 // Import route
 const routes = require("./routes");
