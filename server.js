@@ -9,6 +9,7 @@ app.use(
       "https://miyou.netlify.app/",
       "https://www.miyou.tk/",
       "https://miyou.tk/",
+      "http://localhost:3000",
     ],
   })
 );
