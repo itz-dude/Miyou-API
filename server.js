@@ -4,9 +4,9 @@ const cors = require("cors");
 const PORT = process.env.PORT || 4000;
 
 var whitelist = [
-  "https://miyou.netlify.app/",
-  "https://www.miyou.tk/",
-  "https://miyou.tk/",
+  "https://miyou.netlify.app",
+  "https://www.miyou.tk",
+  "https://miyou.tk",
   "http://localhost:3000",
 ];
 var corsOptions = {
