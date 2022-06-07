@@ -6,32 +6,34 @@ Run your Development server
 
 - pnpm dev
 
+To test the end-points, add http://localhost:3000 in the origin header in postman
+
 Endpoints
 
 Popular Anime
 
-- https://miyou-api.herokuapp.com/api/popular?page=1&count=10
+- http://localhost:4000/api/popular?page=1&count=10
 
 Trending Anime
 
-- https://miyou-api.herokuapp.com/api/trending?page=1&count=10
+- http://localhost:4000/api/trending?page=1&count=10
 
 Top 100 Anime
 
-- https://miyou-api.herokuapp.com/api/top100?page=1&count=10
+- http://localhost:4000/api/top100?page=1&count=10
 
 Favourite Anime
 
-- https://miyou-api.herokuapp.com/api/favourite?page=1&count=10
+- http://localhost:4000/api/favourite?page=1&count=10
 
 Search Anime
 
-- https://miyou-api.herokuapp.com/api/search?name=demon%20slayer
+- http://localhost:4000/api/search?name=demon%20slayer
 
 Anime Details
 
-- https://miyou-api.herokuapp.com/api/getanime?link=/category/jujutsu-kaisen-tv-dub
+- http://localhost:4000/api/getanime?link=/category/jujutsu-kaisen-tv-dub
 
 Anime Watch and Download links
 
-- https://miyou-api.herokuapp.com/api/getlinks?link=/koe-no-katachi-dub-episode-1
+- http://localhost:4000/api/getlinks?link=/koe-no-katachi-dub-episode-1
