@@ -21,6 +21,7 @@ route.get("/getanime", async (req, res) => {
     let title = $(".anime_info_body_bg").find("h1").text();
     let image = $(".anime_info_body_bg").find("img[src]").attr("src");
     let type, description, genre, released, status, otherName;
+    const ep_start = $("#episode_page > li").first().find("a").attr("ep_start");
     let numOfEpisodes = $("#episode_page li:last-child a").attr("ep_end");
 
     $(".type").each((i, el) => {
@@ -52,16 +53,14 @@ route.get("/getanime", async (req, res) => {
     const movie_id = $("#movie_id").attr("value");
     const alias = $("#alias_anime").attr("value");
     const episodeHtml = await axios.get(
-      `${list_episodes_url}?ep_start=${0}&ep_end=${numOfEpisodes}&id=${movie_id}&default_ep=${0}&alias=${alias}`
+      `${list_episodes_url}?ep_start=${ep_start}&ep_end=${numOfEpisodes}&id=${movie_id}&default_ep=${0}&alias=${alias}`
     );
     const $$ = cheerio.load(episodeHtml.data);
 
-    let baseUrl = $$("#episode_related > li:last-child a").attr("href").trim();
-    baseUrl = baseUrl.substring(0, baseUrl.length - 1);
-
-    for (let i = 1; i <= numOfEpisodes; i++) {
-      episodes.push(baseUrl + i);
-    }
+    $$("#episode_related > li").each((i, el) => {
+      episodes.push($(el).find(`a`).attr("href").trim());
+    });
+    episodes.reverse();
 
     let anilistResponse;
     try {

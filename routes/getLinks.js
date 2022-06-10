@@ -9,8 +9,12 @@ const url = "https://gogoanime.fi";
 
 route.get("/getlinks", async (req, res) => {
   let link = url + req.query.link;
-
-  let sources = await scrapeSourceFiles(req.query.link);
+  let sources;
+  try {
+    sources = await scrapeSourceFiles(req.query.link);
+  } catch (e) {
+    console.log(e);
+  }
 
   try {
     const result = [];
