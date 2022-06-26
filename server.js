@@ -14,6 +14,9 @@ var whitelist = [
   "https://miyou.netlify.app",
   "https://www.miyou.tk",
   "https://miyou.tk",
+  "https://miyou-woad.vercel.app",
+  "https://www.miyou.me",
+  "https://miyou.me",
   "http://localhost:3000",
 ];
 var corsOptions = {
