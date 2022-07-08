@@ -6,6 +6,8 @@ const { scrapeSourceFiles } = require("../queryVariables/SourceFiles");
 const route = express.Router();
 
 const url = "https://gogoanime.fi";
+const iframeLink = (episodeId) =>
+  `https://disqus.com/embed/comments/?base=default&f=gogoanimetv&t_u=https%3A%2F%2Fgogoanime.vc%2F${episodeId}&s_o=default#version=cfefa856cbcd7efb87102e7242c9a829`;
 
 route.get("/getlinks", async (req, res) => {
   let link = url + req.query.link;
@@ -69,8 +71,8 @@ route.get("/getlinks", async (req, res) => {
     for (let i = 1; i <= numOfEpisodes; i++) {
       episodes.push(baseEpisodeLink + i);
     }
-
     let titleName = $(".title_name h2").text();
+    const comments = iframeLink(req.query.link.substring(1));
 
     result.push({
       titleName,
@@ -86,6 +88,7 @@ route.get("/getlinks", async (req, res) => {
       baseEpisodeLink,
       episodes,
       sources,
+      comments,
     });
     res.status(200).json(result);
   } catch (err) {

@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 4000;
 app.get("/", cors(), (req, res) => {
   res
     .status(200)
-    .send("Welcome to Miyou API, to use the API use the /api route");
+    .json("Welcome to Miyou API, to use the API use the /api route");
 });
 
 var whitelist = [
