@@ -6,6 +6,10 @@ Run your Development server
 
 - pnpm dev
 
+Add .env file
+
+- LIST_VAR=["http://localhost:3000", "https://www.yourdomain.com"]
+
 To test the end-points, add http://localhost:3000 in the origin header in postman
 
 Endpoints

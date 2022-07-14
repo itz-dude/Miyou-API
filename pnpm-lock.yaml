@@ -1,10 +1,11 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   axios: ^0.26.1
   cheerio: 1.0.0-rc.10
   cors: ^2.8.5
   crypto-js: ^4.1.1
+  dotenv: ^16.0.1
   express: ^4.17.3
 
 dependencies:
@@ -12,6 +13,7 @@ dependencies:
   cheerio: 1.0.0-rc.10
   cors: 2.8.5
   crypto-js: 4.1.1
+  dotenv: 16.0.1
   express: 4.17.3
 
 packages:
@@ -172,6 +174,11 @@ packages:
       dom-serializer: 1.4.1
       domelementtype: 2.3.0
       domhandler: 4.3.1
+    dev: false
+
+  /dotenv/16.0.1:
+    resolution: {integrity: sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==}
+    engines: {node: '>=12'}
     dev: false
 
   /ee-first/1.1.1:

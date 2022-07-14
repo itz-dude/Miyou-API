@@ -3,6 +3,8 @@ const app = express();
 const cors = require("cors");
 const PORT = process.env.PORT || 4000;
 
+require("dotenv").config();
+
 // Default route
 app.get("/", cors(), (req, res) => {
   res
@@ -10,15 +12,7 @@ app.get("/", cors(), (req, res) => {
     .json("Welcome to Miyou API, to use the API use the /api route");
 });
 
-var whitelist = [
-  "https://miyou.netlify.app",
-  "https://www.miyou.tk",
-  "https://miyou.tk",
-  "https://miyou-woad.vercel.app",
-  "https://www.miyou.me",
-  "https://miyou.me",
-  "http://localhost:3000",
-];
+var whitelist = JSON.parse(process.env.LIST_VAR);
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
